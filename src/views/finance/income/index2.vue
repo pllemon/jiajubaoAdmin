@@ -38,7 +38,7 @@
             </template>
           </el-table-column>
           <el-table-column label="记录时间" min-width="140" prop="createtime" />
-          <el-table-column label="相关用户/商家" min-width="120">
+          <el-table-column label="相关用户" min-width="120">
             <template slot-scope="scope">
               {{scope.row.usertpyename}}
             </template>
@@ -67,7 +67,7 @@ export default {
       queryMes: {
         page: 1,
         limit: 20,
-        incometype: 1,
+        incometype: 2,
         logtype: '',
         tran_id: ''
       },

@@ -25,10 +25,13 @@ const mutations = {
 
   ADD_NEWS: (state, news) => {
     let type = news.type
+    let message = JSON.parse(news.message)
+    if (news.type == 'crafSetTlement' && message.number != 1) {
+      type = 'crafSetTlement2'
+    }
     if (!state.list[type]) {
       Vue.set(state.list, type, [])
     }
-    let message = JSON.parse(news.message)
     message.addTime = moment().format('YYYY-MM-DD HH:mm:ss')
     state.list[type].push(message)
     sessionStorage.setItem('dsfNews', JSON.stringify(state.list))

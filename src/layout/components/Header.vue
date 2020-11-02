@@ -81,8 +81,19 @@
             <i class="task-icon el-icon-s-finance" />
           </el-badge>
           <div class="news-mes">
-            <p class="news-title">师傅申请提现</p>
+            <p class="news-title">师傅申请提现（一期）</p>
             <p class="news-dec" v-for="(item,index) in newList.crafSetTlement" :key="index">
+              <span class="time">{{item.addTime}}</span> {{item.name}}申请提现{{item.money}}元，请及时处理！
+            </p>
+          </div>
+        </li>
+        <li @click="goMasterApply2()" class="flex" v-if="newList.crafSetTlement2 && newList.crafSetTlement2.length">
+          <el-badge :value="newList.crafSetTlement2.length" class="item">
+            <i class="task-icon el-icon-s-finance" />
+          </el-badge>
+          <div class="news-mes">
+            <p class="news-title">师傅申请提现（二期）</p>
+            <p class="news-dec" v-for="(item,index) in newList.crafSetTlement2" :key="index">
               <span class="time">{{item.addTime}}</span> {{item.name}}申请提现{{item.money}}元，请及时处理！
             </p>
           </div>
@@ -163,6 +174,11 @@ export default {
       this.$store.commit('news/REMOVE_NEWS', 'crafSetTlement')
       this.showNewsDialog = false
       this.$router.push('/master/settlement?number=1&menu=4-1&currTime' + new Date().getTime())
+    },
+    goMasterApply2() {
+      this.$store.commit('news/REMOVE_NEWS', 'crafSetTlement2')
+      this.showNewsDialog = false
+      this.$router.push('/master/settlement?number=2&menu=4-4&currTime' + new Date().getTime())
     },
     goMemberApply() {
       this.$store.commit('news/REMOVE_NEWS', 'userSetTlement')
