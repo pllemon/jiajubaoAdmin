@@ -108,7 +108,7 @@ export default {
     }
   },
   created() {
-    this.fetchData()
+    this.againFetch()
   },
   methods: {
     surePay(id, status) {

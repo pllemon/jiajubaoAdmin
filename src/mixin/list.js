@@ -9,7 +9,14 @@ export default {
             list: [],
             queryMes: {
                 page: 1,
-                limit: 20
+                limit: 20,
+
+                network_id: '',
+                district: '',
+                city: '',
+                province: '',
+                start_time: '',
+                end_time: '',
             },
             total: 0,
 

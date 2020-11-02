@@ -117,8 +117,6 @@ export default {
   data() {
     return {
       queryMes: {
-        page: 1,
-        limit: 20,
         status: '',
         name: '',
         pay_name: '',

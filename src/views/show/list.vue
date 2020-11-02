@@ -96,62 +96,24 @@ export default {
   },
   data() {
     return {
-      vm: this,
-
-      list: [],
-      listLoading: true,
-      selectArr: [],
-
-      total: 0,
       queryMes: {
         title: '',
         type: '',
         order_sn: '',
         crafts_man_name: '',
         name: '',
-        page: 1,
-        limit: 20,
-        district: '',
-        city: '',
-        province: '',
       },
-
-      currentComponent: '',
-      dialogMes: {},
-
+      
       api: {
+        getList,
         enable: updateRecordStatus
       }
     }
   },
   created() {
-    this.fetchData(1)
-  },
-  watch: {
-    globalSearch: {
-      handler(val) {
-        this.fetchData(1)
-      },
-      deep: true
-    }
+    this.againFetch()
   },
   methods: {
-    fetchData(type) {
-      if (type == 1) {
-        this.queryMes.page = 1
-      }
-      this.listLoading = true
-      this.queryMes.district = this.globalSearch.district
-      this.queryMes.city = this.globalSearch.city
-      this.queryMes.province = this.globalSearch.province
-      getList(this.queryMes).then(response => {
-        this.list = response.data.data
-        this.total = response.data.total
-      }).finally(() => {
-        this.listLoading = false
-      })
-    },
-
     updateRecord(id, type) {
       this.common.updateRecord(type, this, {
         show_id: id,
@@ -159,11 +121,6 @@ export default {
         is_show: type
       }, updateRecordStatus)
     }
-  },
-  computed: {
-    ...mapState({
-      originType: state => state.dict.originType
-    })
   }
 }
 </script>

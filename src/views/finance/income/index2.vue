@@ -65,8 +65,6 @@ export default {
   data() {
     return {
       queryMes: {
-        page: 1,
-        limit: 20,
         incometype: 2,
         logtype: '',
         tran_id: ''
@@ -82,10 +80,7 @@ export default {
     }
   },
   created() {
-    const that = this
-    // this.common.getAllNetwork(this, function(){
-      that.fetchData()
-    // })
+    this.againFetch()
   },
   computed: {
     ...mapState({
