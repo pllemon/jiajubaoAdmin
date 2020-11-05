@@ -65,8 +65,6 @@ export default {
   data() {
     return {
       queryMes: {
-        page: 1,
-        limit: 20,
         incometype: 1,
         logtype: '',
         tran_id: ''

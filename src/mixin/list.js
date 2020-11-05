@@ -43,7 +43,7 @@ export default {
                 if (query.hasOwnProperty(i)) {
                     queryMes[i] = query[i]
                 } else {
-                    queryMes[i] = ''
+                    // queryMes[i] = ''
                 }
             }
             queryMes.page = 1
