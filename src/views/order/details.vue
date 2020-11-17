@@ -126,17 +126,12 @@
             <el-row>
               <el-col :span="8">
                 <el-form-item label="审核人:">
-                  {{message.info.networkusername}}（{{message.info.network_auth}}）
+                  {{message.info.htremark}}
                 </el-form-item>
               </el-col>
               <el-col :span="8">
                 <el-form-item label="审核结果:">
                   {{ message.pay.total_price > 0 ? '成单' : '不成单'}}
-                </el-form-item>
-              </el-col>
-              <el-col :span="8">
-                <el-form-item label="审核备注:">
-                  {{ message.info.htremark || '无'}}
                 </el-form-item>
               </el-col>
             </el-row>
