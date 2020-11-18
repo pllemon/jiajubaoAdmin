@@ -1,62 +1,106 @@
 <template>
-  <el-dialog :modal-append-to-body="false" title="编辑" :visible="true" width="800px" :before-close="handleClose" :close-on-click-modal="false">
+  <el-dialog :modal-append-to-body="false" title="编辑" :visible="true" width="1000px" :before-close="handleClose" :close-on-click-modal="false">
     <el-form ref="form" :model="form" :rules="rules" label-width="140px" style="margin-right: 50px" v-loading="loading">
       <el-row>
-        <el-col :span="24">
-          <el-form-item label="师傅头像:">
-            <gd-upload 
-              v-if="!loading"
-              action='admin/uploadcmauthorurl'
-              :file="file"  
-              @success="uploadSuccess"
-            />
-          </el-form-item>
+        <el-col :span="14">
+          <el-row>
+            <el-col :span="24">
+              <el-form-item label="师傅头像:">
+                <gd-upload 
+                  v-if="!loading"
+                  action='admin/uploadcmauthorurl'
+                  :file="file"
+                  @success="(params) => uploadSuccess(params, 'headerurl')"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="师傅工号:" prop="sn">
+                <el-input type="text" v-model="form.sn"/>
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="师傅姓名:" prop="name">
+                <el-input type="text" v-model="form.name" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="身份证:" prop="sfz">
+                <el-input type="text" v-model="form.sfz" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="联系手机:" prop="phone">
+                <el-input type="text" v-model="form.phone" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="入行年份:" prop="enter_time">
+                <el-input type="text" v-model="form.enter_time" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="所属区域：" prop="areaCode">
+                <el-cascader
+                  ref="areaCascader"
+                  v-model="area.code"
+                  style="width:100%"
+                  :options="options"
+                  @change="changeArea"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="联系地址:" prop="address">
+                <el-input type="text" v-model="form.address" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="个人简介:">
+                <el-input type="textarea" :rows="4" v-model="form.desc" />
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-col>
-        <el-col :span="24">
-          <el-form-item label="师傅工号:" prop="sn">
-            <el-input type="text" v-model="form.sn"/>
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="师傅姓名:" prop="name">
-            <el-input type="text" v-model="form.name" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="身份证:" prop="sfz">
-            <el-input type="text" v-model="form.sfz" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="联系手机:" prop="phone">
-            <el-input type="text" v-model="form.phone" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="入行年份:" prop="enter_time">
-            <el-input type="text" v-model="form.enter_time" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="所属区域：" prop="areaCode">
-            <el-cascader
-              ref="areaCascader"
-              v-model="area.code"
-              style="width:100%"
-              :options="options"
-              @change="changeArea"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="联系地址:" prop="address">
-            <el-input type="text" v-model="form.address" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="个人简介:">
-            <el-input type="textarea" :rows="4" v-model="form.desc" />
-          </el-form-item>
+        <el-col :span="10">
+          <el-row>
+            <el-col :span="24">
+              <el-form-item label="手持证件照:">
+                <gd-upload 
+                  v-if="!loading"
+                  action='admin/uploadcmauthorurl'
+                  :file="caridimg"
+                  :width="250"
+                  :height="150"
+                  @success="(params) => uploadSuccess(params, 'caridimg')"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="证件正面照:">
+                <gd-upload 
+                  v-if="!loading"
+                  action='admin/uploadcmauthorurl'
+                  :file="caridzimg"  
+                  :width="250"
+                  :height="150"
+                  @success="(params) => uploadSuccess(params, 'caridzimg')"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="证件背面照:">
+                <gd-upload 
+                  v-if="!loading"
+                  action='admin/uploadcmauthorurl'
+                  :file="caridfimg"  
+                  :width="250"
+                  :height="150"
+                  @success="(params) => uploadSuccess(params, 'caridfimg')"
+                />
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-col>
       </el-row>
     </el-form>
@@ -83,6 +127,9 @@ export default {
     return {
       options: areaJson,
       file: {},
+      caridimg: {},
+      caridzimg: {},
+      caridfimg: {},
       loading: true,
       form: {
         name: '',
@@ -119,6 +166,21 @@ export default {
       } else {
         that.$set(that.file, 'url', require('@/assets/image/plac.png'))
       }
+      if (data.info.caridimg) {
+        that.$set(that.caridimg, 'url', this.common.ip + data.info.caridimg)
+      } else {
+        that.$set(that.caridimg, 'url', require('@/assets/image/plac.png'))
+      }
+      if (data.info.caridzimg) {
+        that.$set(that.caridzimg, 'url', this.common.ip + data.info.caridzimg)
+      } else {
+        that.$set(that.caridzimg, 'url', require('@/assets/image/plac.png'))
+      }
+      if (data.info.caridfimg) {
+        that.$set(that.caridfimg, 'url', this.common.ip + data.info.caridfimg)
+      } else {
+        that.$set(that.caridfimg, 'url', require('@/assets/image/plac.png'))
+      }
       that.area.code = data.info.areacode.split(',')
       that.form = data.info
     }).finally(() => {
@@ -133,8 +195,8 @@ export default {
       this.form.areacodename = region
     },
 
-    uploadSuccess(data) {
-      this.form.headerurl = data
+    uploadSuccess(data, type) {
+      this.form[type] = data
     },
 
     handleClose() {
