@@ -54,6 +54,11 @@
           </el-table-column>
           <el-table-column label="用户账号" prop="phone" />
           <el-table-column label="用户名" prop="username"/>
+          <el-table-column label="性别">
+            <template slot-scope="scope">
+              {{ sexOptions[scope.row.sex] }}
+            </template>
+          </el-table-column>
           <el-table-column label="下级推荐码" prop="invitation_code"/>
           <!-- <el-table-column label="上级推荐人" width="120" prop="invitation_code"/> -->
           <el-table-column label="下级推荐数" prop="friend_sum"/>
@@ -115,6 +120,10 @@ export default {
         is_business: '',
         page: 1,
         limit: 20
+      },
+      sexOptions: {
+        1: '男',
+        2: '女'
       },
 
       currentComponent: '',
