@@ -98,13 +98,14 @@
             </template>
           </el-table-column>
           <el-table-column label="创建时间" prop="create_time" width="180" />
-          <el-table-column label="操作" width="160" fixed="right">
+          <el-table-column label="操作" width="200" fixed="right">
             <template slot-scope="scope">
               <el-button type="text" @click="loadComponent('Details', scope.row.order_id)">详情</el-button>
               <el-button type="text" v-if="scope.row.status == 1 && !scope.row.network_id" @click="loadComponent('Examine', {type:0, id:scope.row.order_id})">分配</el-button>
               <!-- <el-button type="text" v-if="scope.row.status == 1 && scope.row.appo_time" @click="loadComponent('Examine', {type:1, id:scope.row.order_id})">报价</el-button> -->
               <el-button type="text" v-if="scope.row.status == 4" @click="loadComponent('Appoint', scope.row.order_id)">指派</el-button>
               <el-button type="text" v-if="scope.row.status == 3" @click="release(scope.row.order_id)">发布</el-button>
+              <el-button type="text" v-if="scope.row.status == 3" @click="loadComponent('ChooseMaster', scope.row.order_id)">选择师傅</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -131,6 +132,7 @@ import { getList, release } from '@/api/order'
 import Details from '@/views/order/details'
 import Examine from '@/views/order/examine'
 import Appoint from '@/views/order/appoint'
+import ChooseMaster from '@/views/order/chooseMaster'
 import { menuData } from '@/utils/menu'
 
 export default {
@@ -138,7 +140,8 @@ export default {
   components: {
     Details,
     Examine,
-    Appoint
+    Appoint,
+    ChooseMaster
   },
   data() {
     return {
