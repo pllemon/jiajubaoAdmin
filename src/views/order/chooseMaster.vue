@@ -1,8 +1,19 @@
 <template>
   <el-dialog :modal-append-to-body="false" title="指派师傅" :visible="true" width="1000px" :before-close="handleClose" :close-on-click-modal="false">
     <div>
-      
         <p style="margin-bottom: 10px">请选择一个师傅，该订单将派发给该师傅负责</p>
+        <el-form :inline="true" :model="queryMes" size="mini" ref="searchForm">
+          <el-form-item label="师傅姓名" prop="name">
+            <el-input v-model="queryMes.name" placeholder="请输入" />
+          </el-form-item>
+          <el-form-item label="师傅工号"  prop="sn">
+            <el-input v-model="queryMes.sn" placeholder="请输入" />
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="search()">搜索</el-button>
+            <el-button @click="resetSearch()">重置</el-button>
+          </el-form-item>
+        </el-form>
         <el-table
           ref="table"
           v-loading="listLoading"
@@ -159,7 +170,8 @@ export default {
         this.loading = true
         choosecraftsman({
           order_id: this.dialogMes.id,
-          craftsman_id: id
+          craftsman_id: id,
+          zdchoose: 1
         }).then(response => {
           this.common.closeComponent(this)
         }).finally(() => {
