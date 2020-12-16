@@ -22,7 +22,7 @@
       <el-form-item label="网点地址：" prop="address">
         <el-input v-model="form.address" />
       </el-form-item>
-      <el-form-item label="网点描述：" prop="desc">
+      <el-form-item label="店长描述：" prop="desc">
         <el-input
           v-model="form.desc"
           type="textarea"

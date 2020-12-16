@@ -7,7 +7,7 @@ const menuData = [
       {
         id: '1-0',
         title: '所有订单',
-        path: '/order/list?menu=1-0&section=1'
+        path: '/order/list?status=-1&&menu=1-0&section=1'
       },
       {
         id: '1-1',

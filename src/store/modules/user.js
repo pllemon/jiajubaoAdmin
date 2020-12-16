@@ -16,6 +16,7 @@ if (globalSearch) {
 }
 
 const state = {
+  listTotal: 0,
   token: getToken(),
   roles: null,
   userInfo: null,
@@ -23,6 +24,9 @@ const state = {
 }
 
 const mutations = {
+  SET_LISTTOTAL: (state, data) => {
+    state.listTotal = data
+  },
   SET_TOKEN: (state, token) => {
     state.token = token
   },

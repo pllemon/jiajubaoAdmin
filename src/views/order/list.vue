@@ -165,6 +165,11 @@ export default {
     this.againFetch()
   },
   methods: {
+    beforeFetch() {
+      if (this.queryMes.status == -1) {
+        this.queryMes.status = ''
+      }
+    },
     // 发布订单
     release(id) {
       this.$confirm('确定发布该订单？发布后该订单将显示在抢单中心，师傅可以进行报名。', '提示', {

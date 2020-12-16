@@ -12,6 +12,8 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 const whiteList = ['/login'] // 不会重定向的白名单
 
 router.beforeEach(async(to, from, next) => {
+  store.commit('user/SET_LISTTOTAL', 0)
+
   // 开始切换页面进度条
   NProgress.start()
 

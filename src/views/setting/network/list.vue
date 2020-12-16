@@ -37,7 +37,7 @@
           <el-table-column label="网点名称" prop="name" />
           <el-table-column label="所属区域" prop="region" />
           <el-table-column label="网点地址" prop="address" />
-          <el-table-column label="网点描述" prop="desc" />
+          <el-table-column label="店长描述" prop="desc" />
           <el-table-column label="状态">
             <template slot-scope="scope">
               {{ showType[scope.row.is_show] }}
@@ -106,6 +106,7 @@ export default {
       getNetworkList(this.queryMes).then(response => {
         this.list = response.data.data
         this.total = response.data.total
+        this.$store.commit('user/SET_LISTTOTAL', response.data.total)
       }).finally(() => {
         this.listLoading = false
       })

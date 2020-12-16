@@ -1,7 +1,7 @@
 <template>
   <el-menu :default-active="activeIndex" mode="horizontal">
     <!-- <el-menu-item index="0">
-      <router-link class="menu-link" to="/"><i class="el-icon-data-analysis"></i>数据概述</router-link>
+      <router-link class="menu-link" to="/"><i class="el-icon-data-analysis"></i>所有订单</router-link>
     </el-menu-item> -->
     <el-submenu v-for="(item, index) in menuData" :key="index" :index="item.id">
       <template slot="title">

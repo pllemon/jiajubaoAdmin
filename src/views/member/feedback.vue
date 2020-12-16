@@ -88,6 +88,7 @@ export default {
       getList(this.queryMes).then(response => {
         this.list = response.data.data
         this.total = response.data.total
+        this.$store.commit('user/SET_LISTTOTAL', response.data.total)
       }).finally(() => {
         this.listLoading = false
       })

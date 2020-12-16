@@ -2,7 +2,7 @@
   <div class="app-wrapper flex-column">
     <Header />
     <div class="sub-header">
-      <p class="sub-title">{{title}}</p>
+      <p class="sub-title">{{title}}（{{listTotal}}）</p>
       <Search />
     </div>
     <div class="flex1">
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { Header } from './components'
 import Search from '@/components/Search'
 import ResizeMixin from './mixin/ResizeHandler'
@@ -42,7 +43,7 @@ export default {
               }
             })
           })
-          this.title = '数据概述'
+          this.title = '所有订单'
         } catch (e) {
           this.title = e.title
         }
@@ -50,6 +51,11 @@ export default {
       immediate: true
     }
   },
+  computed: {
+    ...mapState({
+      listTotal: state => state.user.listTotal
+    })
+  }
 }
 </script>
 

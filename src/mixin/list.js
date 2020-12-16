@@ -75,6 +75,7 @@ export default {
                 } else {
                     this.list = data.data
                     this.total = data.total
+                    this.$store.commit('user/SET_LISTTOTAL', data.total)
                 }
                 this.$nextTick(() => {
                     this.$refs.table.bodyWrapper.scrollTop = 0
