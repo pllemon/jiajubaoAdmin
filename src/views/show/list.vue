@@ -68,7 +68,7 @@
               <!-- <el-button type="text" @click="loadComponent('Update', scope.row.id)">编辑</el-button> -->
               <el-button type="text" v-if="scope.row.is_show == 2" @click="updateStatus({show_id:scope.row.id, status:1 ,is_show:1})">启用</el-button>
               <el-button type="text" v-if="scope.row.is_show == 1" @click="updateStatus({show_id:scope.row.id, status:1, is_show:2})">禁用</el-button>
-              <!-- <el-button type="text" @click="updateRecord(scope.row.id, 3)">删除</el-button> -->
+              <el-button type="text" @click="updateRecord(scope.row.id, 3)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
