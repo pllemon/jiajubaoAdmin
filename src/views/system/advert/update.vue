@@ -1,7 +1,7 @@
 <template>
   <el-dialog :modal-append-to-body="false" :title="dialogMes.id?'编辑':'新增'" :visible="true" width="680px" :before-close="handleClose">
     <el-form ref="form" :rules="rules" :model="form" label-width="80px" style="margin: 0 40px" v-loading="loading">
-      <el-form-item label="展示图片" required>
+      <el-form-item label="展示图片(750*350)" required>
         <gd-upload 
           v-if="!loading"
           :file="file" 

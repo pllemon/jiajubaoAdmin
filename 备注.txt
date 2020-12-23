@@ -287,7 +287,15 @@ websocket推送回来的内容都添加个id
 
 
 1.师傅列表、店长列表：加推广码
-2.广告列表：网点描述 =》店长描述
-3.广告列表：编辑添加图片尺寸
+2.广告列表：网点描述 =》店长描述（ok）
+3.广告列表：编辑添加图片尺寸（ok）
 4.施工广场：删除（真删）
-5.总数显示
+5.总数显示（ok）
+6.选择师傅搜索逻辑修改（ok）
+7.商家加属性
+    /admin/businesslist 搜索添加 attribute
+    /admin/businessexamine 保存属性 attribute
+    /admin/businessinfo、/admin/businesslist  返回attribute
+    给个修改商家资料的接口
+
+    /businesslist 添加搜索 attribute

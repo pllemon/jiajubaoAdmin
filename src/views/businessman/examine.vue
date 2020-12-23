@@ -13,8 +13,11 @@
             <el-option v-for="(item, index) in networkList" :key="index" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
-      </template>
-      <template v-if="examineForm.status == '1'">
+        <el-form-item label="店铺属性" prop="attribute">
+          <el-select v-model="queryMes.attribute" placeholder="请选择">
+            <el-option v-for="(item, index) in dict.businessAttr" :key="index" :label="item" :value="index" />
+          </el-select>
+        </el-form-item>
         <el-form-item label="加盟金额：" prop="joininprice">
           <el-input-number v-model="examineForm.joininprice" :precision="2" :step="1"></el-input-number>
         </el-form-item>
@@ -55,10 +58,13 @@ export default {
         status: '1',
         bhremark: '',
         joininprice: 0,
-        network_id: ''
+        network_id: '',
+        attribute: ''
       },
       rules: {
         joininprice: [{ required: true, message: '请输入加盟金额', trigger: 'change' }],
+        network_id: [{ required: true, message: '请选择关联网点', trigger: 'change' }],
+        attribute: [{ required: true, message: '请选择店铺属性', trigger: 'change' }],
       },
       networkList: []
     }
@@ -66,6 +72,12 @@ export default {
 
   created() {
     this.common.getAllNetwork(this)
+  },
+
+  computed: {
+    ...mapState({
+      dict: state => state.dict
+    })
   },
 
   methods: {

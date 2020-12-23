@@ -3,11 +3,11 @@
     <div>
         <p style="margin-bottom: 10px">请选择一个师傅，该订单将派发给该师傅负责</p>
         <el-form :inline="true" :model="queryMes" size="mini" ref="searchForm">
-          <el-form-item label="师傅姓名" prop="name">
-            <el-input v-model="queryMes.name" placeholder="请输入" />
+          <el-form-item label="师傅手机号"  prop="phone">
+            <el-input v-model="queryMes.phone" placeholder="请输入" clearable />
           </el-form-item>
           <el-form-item label="师傅工号"  prop="sn">
-            <el-input v-model="queryMes.sn" placeholder="请输入" />
+            <el-input v-model="queryMes.sn" placeholder="请输入" clearable />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="search()">搜索</el-button>
@@ -42,7 +42,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <gd-pagination style="margin-top:20px" :total="total" :current-page="queryMes.page" :page-size="queryMes.limit" />
+        <!-- <gd-pagination style="margin-top:20px" :total="total" :current-page="queryMes.page" :page-size="queryMes.limit" /> -->
     </div>
   </el-dialog>
 </template>
@@ -63,18 +63,13 @@ export default {
     return {
       queryMes: {
         page: 1,
-        limit: 20,
-        start_time: '',
-        end_time: '',
-        name: '',
+        limit: 1000,
+        phone: '',
         sn: '',
-        status: '',
-        district: '',
-        city: '',
-        province: '',
+        status: ''
       },
       
-      listLoading: true,
+      listLoading: false,
       list: [],
       total: 0,
       api: {
@@ -87,10 +82,6 @@ export default {
       orderStatus: state => state.dict.orderStatus
     }),
     ...mapGetters(['userInfo', 'globalSearch'])
-  },
-
-  created() {
-    this.againFetch()
   },
 
   methods: {
@@ -107,50 +98,28 @@ export default {
         this.fetchData()
     },
 
-    againFetch() {
-        let queryMes = this.common.deepCopy(this.queryMes)
-        let query = this.$route.query
-        for (let i in queryMes) {
-            if (query.hasOwnProperty(i)) {
-                queryMes[i] = query[i]
-            } else {
-                // queryMes[i] = ''
-            }
-        }
-        queryMes.page = 1
-        queryMes.limit = 20
-
-        queryMes.start_time = this.globalSearch.startTime
-        queryMes.end_time = this.globalSearch.endTime
-        queryMes.network_id = this.globalSearch.network_id
-        queryMes.district = this.globalSearch.district
-        queryMes.city = this.globalSearch.city
-        queryMes.province = this.globalSearch.province
-        
-        this.queryMes = queryMes
-        this.fetchData()
-    },
-
-    beforeFetch() {
-      this.queryMes.status = 1
-    },
-    
     // 获取列表
     fetchData() {
-        if (this.beforeFetch) {
-            const beforeRes = this.beforeFetch()
-            if (beforeRes === false) {
-                return false
-            }
+        if (this.queryMes.phone == '' && this.queryMes.sn == '') {
+          this.list = []
+          this.total = 0
+          return false;
         }
+        this.queryMes.status = 1
         this.listLoading = true
         this.api.getList(this.queryMes).then(({ data }) => {
-            if (this.fetchCallback) {
-                this.fetchCallback(data)
-            } else {
-                this.list = data.data
-                this.total = data.total
-            }
+            this.list = data.data.filter(item => {
+              let isPhone = true
+              let isSn = true
+              if (this.queryMes.phone && item.phone != this.queryMes.phone) {
+                isPhone = false
+              }
+              if (this.queryMes.sn && item.sn != this.queryMes.sn) {
+                isSn = false
+              }
+              return isPhone && isSn
+            })
+            // this.total = data.total
             this.$nextTick(() => {
                 this.$refs.table.bodyWrapper.scrollTop = 0
             })

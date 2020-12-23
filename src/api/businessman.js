@@ -8,6 +8,14 @@ export function getList(data) {
   })
 }
 
+export function savebusiness(params) {
+  return request({
+    url: '/admin/savebusiness',
+    method: 'get',
+    params
+  })
+}
+
 export function businessinfo(params) {
   return request({
     url: '/admin/businessinfo',
