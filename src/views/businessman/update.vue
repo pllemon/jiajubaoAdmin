@@ -34,7 +34,7 @@ export default {
     return {
       loading: true,
       form: {
-        business_id: '',
+        busines_id: '',
         network_id: '',
         attribute: ''
       },
@@ -52,7 +52,7 @@ export default {
   },
   created() {
     let that = this
-    this.form.business_id = this.dialogMes.id
+    this.form.busines_id = this.dialogMes.id
     this.form.network_id = this.dialogMes.network_id
     this.form.attribute = this.dialogMes.attribute
     this.common.getAllNetwork(this, function() {

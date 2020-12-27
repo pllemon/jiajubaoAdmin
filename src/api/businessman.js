@@ -8,11 +8,11 @@ export function getList(data) {
   })
 }
 
-export function savebusiness(params) {
+export function savebusiness(data) {
   return request({
     url: '/admin/savebusiness',
-    method: 'get',
-    params
+    method: 'post',
+    data
   })
 }
 

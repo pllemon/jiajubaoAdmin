@@ -8,7 +8,7 @@
               <el-form-item label="师傅头像:">
                 <gd-upload 
                   v-if="!loading"
-                  action='admin/uploadcmauthorurl'
+                  action='/admin/uploadcmauthorurl'
                   :file="file"
                   @success="(params) => uploadSuccess(params, 'headerurl')"
                 />
@@ -68,7 +68,7 @@
               <el-form-item label="手持证件照:">
                 <gd-upload 
                   v-if="!loading"
-                  action='admin/uploadcmauthorurl'
+                  action='/admin/uploadcmauthorurl'
                   :file="caridimg"
                   :width="250"
                   :height="150"
@@ -80,7 +80,7 @@
               <el-form-item label="证件正面照:">
                 <gd-upload 
                   v-if="!loading"
-                  action='admin/uploadcmauthorurl'
+                  action='/admin/uploadcmauthorurl'
                   :file="caridzimg"  
                   :width="250"
                   :height="150"
@@ -92,7 +92,7 @@
               <el-form-item label="证件背面照:">
                 <gd-upload 
                   v-if="!loading"
-                  action='admin/uploadcmauthorurl'
+                  action='/admin/uploadcmauthorurl'
                   :file="caridfimg"  
                   :width="250"
                   :height="150"
