@@ -56,6 +56,7 @@
           </el-table-column>
           <el-table-column label="工号" prop="sn" min-width="150"/>
           <el-table-column label="姓名" prop="name"/>
+          <el-table-column label="下级推荐码" width="100" prop="invitation_code"/>
           <el-table-column label="身份证" prop="sfz" min-width="180"/>
           <el-table-column label="手机号" prop="phone" min-width="120"/>
           <el-table-column label="入行年份" prop="enter_time" width="100"/>

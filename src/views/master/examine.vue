@@ -7,14 +7,14 @@
           <el-radio label="3">不通过</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="师傅头像：" prop="headerurl" v-show="form.status == '1'">
+      <!-- <el-form-item label="师傅头像：" prop="headerurl" v-show="form.status == '1'">
         <gd-upload 
           ref="upload"
-          action='admin/uploadcmauthorurl'
+          action='/admin/uploadcmauthorurl'
           :file="file"  
           @success="uploadSuccess"
         />
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="师傅工号：" prop="sn"  v-show="form.status == '1'">
         <el-input type="text" v-model="form.sn" />
       </el-form-item>
@@ -70,7 +70,6 @@ export default {
         user_id: '',
         imglist: '',
         reject_reason: '',
-        headerurl: '',
         sn: ''
       },
       area: {
@@ -102,8 +101,6 @@ export default {
         this.form.reject_reason = ''
       } else {
         this.form.sn = ''
-        this.form.headerurl = ''
-        this.$refs.upload.clearImg()
         this.file.url = ''
       }
       this.$refs.form.resetFields()
@@ -126,7 +123,6 @@ export default {
           if (that.form.status == 1) {
             obj = {
               status: 1,
-              headerurl: that.form.headerurl,
               areaCode: that.form.areaCode,
               areaCodeName: that.form.areaCodeName,
               user_id: that.form.user_id,

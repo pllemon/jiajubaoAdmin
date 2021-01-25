@@ -21,6 +21,7 @@
           <el-table-column label="序号" type="index" width="50" fixed/>
           <el-table-column label="工号" prop="sn" />
           <el-table-column label="姓名" prop="name" />
+          <el-table-column label="下级推荐码" prop="invitation_code"/>
           <el-table-column label="联系电话" prop="phone" />
           <el-table-column label="角色" >
             <template slot-scope="scope">
