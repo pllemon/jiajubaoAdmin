@@ -72,6 +72,22 @@ export const mainAdminRoutes = [
     ]
   },
 
+  {
+    path: '/attendant',
+    component: Layout,
+    redirect: '/attendant/list',
+    name: 'Attendant',
+    meta: { title: '客服管理', icon: 'namecard' },
+    children: [
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/attendant/list'),
+        meta: { title: '全部客服', menu: '2-4'}
+      }
+    ]
+  },
+
 
   {
     path: '/businessman',
