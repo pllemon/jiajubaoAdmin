@@ -17,20 +17,6 @@
             <el-input v-model="form.phone" clearable />
           </el-form-item>
         </el-col>
-        <el-col :span="24">
-          <el-form-item label="角色" prop="type">
-             <el-select v-model="form.type">
-              <el-option v-for="(item, index) in ownerType" :key="index" :label="item" :value="index" />
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="24">
-          <el-form-item label="所属网点" prop="network_id" clearable>
-            <el-select v-model="form.network_id">
-              <el-option v-for="(item, index) in networkList" :key="index" :label="item.name" :value="item.id" />
-            </el-select>
-          </el-form-item>
-        </el-col>
       </el-row>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -42,7 +28,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { getDetails, updateRecord } from '@/api/shopowner'
+import { getDetails, updateRecord } from '@/api/attendant'
 import { getNetworkList } from '@/api/network'
 
 export default {
@@ -58,28 +44,16 @@ export default {
       loading: true,
       rules: {
         name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
-        phone: [{ required: true, message: '请输入联系电话', trigger: 'blur' }],
-        network_id: [{ required: true, message: '请选择所属网点', trigger: 'change' }],
-        type: [{ required: true, message: '请选择角色', trigger: 'change' }],
+        phone: [{ required: true, message: '请输入联系电话', trigger: 'blur' }]
       },
       form: {
         id: '',
         phone: '',
-        type: '',
         name: '',
-        headerimg: '',
-        network_id: ''
-      },
-      networkList: []
+      }
     }
   },
-  computed: {
-    ...mapState({
-      ownerType: state => state.dict.ownerType
-    })
-  },
   created() {
-    this.common.getAllNetwork(this)
     if (this.dialogMes.id) {
       this.getDetails()
     } else {
@@ -96,7 +70,6 @@ export default {
         id: this.dialogMes.id
       }).then(response => {
         const { data } = response
-        data.type = data.type.toString()
         this.form = data
       }).finally(() => {
         this.loading = false

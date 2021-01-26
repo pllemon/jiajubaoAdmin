@@ -21,18 +21,8 @@
           <el-table-column label="序号" type="index" width="50" fixed/>
           <el-table-column label="工号" prop="sn" />
           <el-table-column label="姓名" prop="name" />
+          <el-table-column label="下级推荐码" prop="invitation_code"/>
           <el-table-column label="联系电话" prop="phone" />
-          <el-table-column label="角色" >
-            <template slot-scope="scope">
-              {{ownerType[scope.row.type]}}
-            </template>
-          </el-table-column>
-          <el-table-column label="所属网点" >
-            <template slot-scope="scope">
-              {{scope.row.network_name}}
-            </template>
-          </el-table-column>
-          <!-- <el-table-column label="创建时间" width="200" prop="time" /> -->
           <el-table-column label="操作" width="150" fixed="right">
             <template slot-scope="scope">
               <el-button type="text" @click="common.loadComponent(vm, 1, scope.row.id)">编辑</el-button>
@@ -51,8 +41,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import { getList, updateRecord } from '@/api/shopowner'
-import Update from '@/views/shopowner/update'
+import { getList, updateRecord } from '@/api/attendant'
+import Update from '@/views/attendant/update'
 
 export default {
   data() {
