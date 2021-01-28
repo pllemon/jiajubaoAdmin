@@ -1,6 +1,17 @@
 <template>
   <el-dialog :modal-append-to-body="false" :title="dialogMes.id?'编辑':'新增'" :visible="true" width="600px" :before-close="handleClose" :close-on-click-modal="false">
     <el-form ref="form" :model="form" :rules="rules" label-width="140px" style="margin-right: 50px" v-loading="loading">
+       <el-form-item label="展示图片(400*200)" required>
+        <gd-upload 
+          v-if="!loading"
+          :file="file" 
+          :autoUpload="false" 
+          width="320" 
+          height="180" 
+          action="#"
+          @change="changeFile"
+        />
+      </el-form-item>
       <el-form-item label="类目名称：" prop="type_name">
         <el-input v-model="form.type_name" />
       </el-form-item>
@@ -15,8 +26,7 @@
   </el-dialog>
 </template>
 <script>
-import { mapState } from 'vuex'
-import { updateRecord } from '@/api/category'
+import { getDetails, updateRecord } from '@/api/category'
 
 export default {
   props: {
@@ -27,8 +37,10 @@ export default {
   },
   data() {
     return {
-      loading: false,
+      vm: this,
+      loading: true,
 
+      file: {},
       form: {
         type_name: '',
         orders: '',
@@ -39,25 +51,59 @@ export default {
       }
     }
   },
+  
+  created() {
+    if (this.dialogMes.id) {
+      this.getDetails()
+    } else {
+      this.loading = false
+    }
+  },
 
   methods: {
+    getDetails() {
+      getDetails({
+        banner_id: this.dialogMes.id
+      }).then(response => {
+        const { data } = response
+        this.file.url = this.common.ip + data.imgurl
+        this.form = data
+      }).finally(() => {
+        this.loading = false
+      })
+    },
+
+    changeFile(file) {
+      this.file = file
+    },
+
     handleClose() {
       this.$parent.currentComponent = ''
     },
 
-    submit() {
-      const that = this
-      that.$refs.form.validate((valid) => {
+    submitForm() {
+      this.$refs.form.validate((valid) => {
         if (valid) {
-          that.loading = true
-          updateRecord(that.form).then(response => {
-            that.common.closeComponent(that)
+          let formData = new FormData()
+          for (let i in this.form) {
+            formData.append(i, this.form[i])
+          }
+          if (this.file.raw) {
+            formData.append('file', this.file.raw)
+          } else if (!this.file.url) {
+            this.$message.error('请上传图片')
+            return false
+          }
+          
+          this.loading = true
+          updateRecord(formData).then(response => {
+            this.common.closeComponent(this)
           }).finally(() => {
-            that.loading = false
+            this.loading = false
           })
         }
       })
-    }
+    },
   }
 }
 </script>
