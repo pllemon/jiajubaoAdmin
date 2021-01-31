@@ -40,7 +40,7 @@
           height="100%"
         >
           <el-table-column label="序号" type="index" width="50" fixed/>
-          <el-table-column label="展示图片" width="180">
+          <el-table-column label="展示图片" width="280">
             <template slot-scope="scope">
               <gd-image width="160" height="90" :src="scope.row.imgurl"/>
             </template>

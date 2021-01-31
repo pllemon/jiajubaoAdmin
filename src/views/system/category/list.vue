@@ -22,10 +22,16 @@
           height="100%"
         >
           <el-table-column label="序号" type="index" width="50" fixed/>
+          <el-table-column label="展示图片" width="280">
+            <template slot-scope="scope">
+              <gd-image width="160" height="90" :src="scope.row.imgurl"/>
+            </template>
+          </el-table-column>
           <el-table-column label="类目名称" prop="type_name" />
           <el-table-column label="排序" prop="orders" />
           <el-table-column label="操作">
             <template slot-scope="scope">
+              <el-button type="text" @click="common.loadComponent(vm, 1, scope.row.id)">编辑</el-button>
               <el-button type="text" @click="updateRecord(scope.row.id, 3)">删除</el-button>
             </template>
           </el-table-column>
@@ -52,6 +58,7 @@ export default {
   },
   data() {
     return {
+      vm: this,
       queryMes: {
         name: '',
         region: '',

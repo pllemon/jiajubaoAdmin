@@ -14,7 +14,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="店铺属性" prop="attribute">
-          <el-select v-model="queryMes.attribute" placeholder="请选择">
+          <el-select v-model="examineForm.attribute" placeholder="请选择">
             <el-option v-for="(item, index) in dict.businessAttr" :key="index" :label="item" :value="index" />
           </el-select>
         </el-form-item>

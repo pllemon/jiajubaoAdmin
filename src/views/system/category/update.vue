@@ -1,6 +1,6 @@
 <template>
   <el-dialog :modal-append-to-body="false" :title="dialogMes.id?'编辑':'新增'" :visible="true" width="600px" :before-close="handleClose" :close-on-click-modal="false">
-    <el-form ref="form" :model="form" :rules="rules" label-width="140px" style="margin-right: 50px" v-loading="loading">
+    <el-form ref="form" :model="form" :rules="rules" label-width="80px" style="margin: 0 40px" v-loading="loading">
        <el-form-item label="展示图片(400*200)" required>
         <gd-upload 
           v-if="!loading"
@@ -12,10 +12,10 @@
           @change="changeFile"
         />
       </el-form-item>
-      <el-form-item label="类目名称：" prop="type_name">
+      <el-form-item label="类目名称" prop="type_name">
         <el-input v-model="form.type_name" />
       </el-form-item>
-      <el-form-item label="排序：" prop="orders">
+      <el-form-item label="排序" prop="orders">
         <el-input v-model="form.orders" />
       </el-form-item>
     </el-form>
