@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getList(data) {
   return request({
-    url: `/admin/networkuserlist?page=${data.page}&limit=${data.limit}`,
+    url: `/admin/customerlist?page=${data.page}&limit=${data.limit}`,
     method: 'post',
     data
   })
@@ -10,16 +10,16 @@ export function getList(data) {
 
 export function getDetails(params) {
   return request({
-    url: '/admin/networkuserinfo',
+    url: '/admin/customerinfo',
     method: 'get',
     params
   })
 }
 
 export function updateRecord(data) {
-  let url = '/admin/addnetworkuser'
+  let url = '/admin/addcustomer'
   if (data.id) {
-    url = '/admin/savenetworkuser'
+    url = '/admin/savecustomer'
   }
   return request({
     url,
