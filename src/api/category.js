@@ -10,15 +10,17 @@ export function getList(data) {
 
 export function getDetails(params) {
   return request({
-    url: '/admin/saveservertype',
+    url: '/admin/servertypeinfo',
     method: 'get',
     params
   })
 }
 
-export function updateRecord(data) {
+export function updateRecord(data, id) {
+  console.log(data)
+  console.log(id)
   let url = '/admin/addservertype'
-  if (data.id) {
+  if (id) {
     url = '/admin/saveservertype'
   }
   return request({

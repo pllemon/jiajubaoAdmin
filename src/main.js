@@ -41,8 +41,8 @@ Vue.component('GdUpload', GdUpload)
 import GdImage from '@/components/Image'
 Vue.component('GdImage', GdImage)
 
-import Vconsole from 'vconsole'
-new Vconsole()
+// import Vconsole from 'vconsole'
+// new Vconsole()
 
 Vue.filter('normNumber', function (value, unit) {
   return parseFloat(value).toFixed(2) + (unit ? unit : '')

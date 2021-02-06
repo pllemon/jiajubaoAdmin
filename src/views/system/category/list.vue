@@ -22,9 +22,9 @@
           height="100%"
         >
           <el-table-column label="序号" type="index" width="50" fixed/>
-          <el-table-column label="展示图片" width="280">
+          <el-table-column label="展示图片" width="150">
             <template slot-scope="scope">
-              <gd-image width="160" height="90" :src="scope.row.imgurl"/>
+              <gd-image width="90" height="90" :src="scope.row.imgurl"/>
             </template>
           </el-table-column>
           <el-table-column label="类目名称" prop="type_name" />

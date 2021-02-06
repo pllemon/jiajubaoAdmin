@@ -1,12 +1,12 @@
 <template>
   <el-dialog :modal-append-to-body="false" :title="dialogMes.id?'编辑':'新增'" :visible="true" width="600px" :before-close="handleClose" :close-on-click-modal="false">
     <el-form ref="form" :model="form" :rules="rules" label-width="80px" style="margin: 0 40px" v-loading="loading">
-       <el-form-item label="展示图片(400*200)" required>
+       <el-form-item label="展示图片(400*400)" required>
         <gd-upload 
           v-if="!loading"
           :file="file" 
           :autoUpload="false" 
-          width="320" 
+          width="180" 
           height="180" 
           action="#"
           @change="changeFile"
@@ -21,7 +21,7 @@
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="handleClose">取 消</el-button>
-      <el-button type="primary" @click="submit">确 定</el-button>
+      <el-button type="primary" @click="submitForm">确 定</el-button>
     </span>
   </el-dialog>
 </template>
@@ -42,6 +42,7 @@ export default {
 
       file: {},
       form: {
+        id: '',
         type_name: '',
         orders: '',
         status: 1
@@ -54,6 +55,7 @@ export default {
   
   created() {
     if (this.dialogMes.id) {
+      this.form.id = this.dialogMes.id
       this.getDetails()
     } else {
       this.loading = false
@@ -63,7 +65,7 @@ export default {
   methods: {
     getDetails() {
       getDetails({
-        banner_id: this.dialogMes.id
+        id: this.dialogMes.id
       }).then(response => {
         const { data } = response
         this.file.url = this.common.ip + data.imgurl
@@ -89,14 +91,14 @@ export default {
             formData.append(i, this.form[i])
           }
           if (this.file.raw) {
-            formData.append('file', this.file.raw)
+            formData.append('imgurl', this.file.raw)
           } else if (!this.file.url) {
             this.$message.error('请上传图片')
             return false
           }
           
           this.loading = true
-          updateRecord(formData).then(response => {
+          updateRecord(formData, this.form.id).then(response => {
             this.common.closeComponent(this)
           }).finally(() => {
             this.loading = false
