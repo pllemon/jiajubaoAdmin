@@ -88,6 +88,23 @@ export const mainAdminRoutes = [
     ]
   },
 
+  
+  {
+    path: '/salesman',
+    component: Layout,
+    redirect: '/salesman/list',
+    name: 'Salesman',
+    meta: { title: '业务管理', icon: 'namecard' },
+    children: [
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/salesman/list'),
+        meta: { title: '全部业务', menu: '2-6'}
+      }
+    ]
+  },
+
 
   {
     path: '/businessman',
