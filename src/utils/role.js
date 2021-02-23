@@ -192,7 +192,13 @@ export const mainAdminRoutes = [
         name: 'MasterMonthlyStatistics',
         component: () => import('@/views/finance/masterMonthlyStatistics'),
         meta: { title: '师傅月统计', menu: '4-7' }
-      }
+      },
+      {
+        path: 'salesman',
+        name: 'Salesman',
+        component: () => import('@/views/finance/salesman'),
+        meta: { title: '业务流水', menu: '4-9'}
+      },
     ]
   },
 

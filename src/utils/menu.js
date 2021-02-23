@@ -201,6 +201,11 @@ const menuData = [
         path: '/finance/expend'
       },
       {
+        id: '4-9',
+        title: '业务流水',
+        path: '/finance/salesman'
+      },
+      {
         id: '4-6',
         title: '网点月统计',
         path: '/finance/networkMonthlyStatistics'

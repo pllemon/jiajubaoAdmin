@@ -24,8 +24,10 @@
           <el-table-column label="下级推荐码" prop="invitation_code"/>
           <el-table-column label="联系电话" prop="phone" />
           <el-table-column label="所属区域" prop="addressstr" />
+          <el-table-column label="创建时间" prop="" />
           <el-table-column label="操作" width="150" fixed="right">
             <template slot-scope="scope">
+              <el-button type="text" @click="viewBusiness(scope.row.id)">查看商家</el-button>
               <el-button type="text" @click="common.loadComponent(vm, 1, scope.row.id)">编辑</el-button>
               <el-button type="text" @click="updateRecord(scope.row.id, 3)">删除</el-button>
             </template>
@@ -89,6 +91,10 @@ export default {
         id: id,
         is_show: type
       }, updateRecord)
+    },
+
+    viewBusiness() {
+
     }
   },
   components: {
