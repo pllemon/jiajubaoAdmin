@@ -43,8 +43,7 @@
 
 <script>
 import ListMixin from '@/mixin/list'
-import { mapState } from 'vuex'
-import { expendituretransaction } from '@/api/finance'
+import { salesmantransactionlog } from '@/api/finance'
 
 export default {
   mixins: [ListMixin],
@@ -60,7 +59,7 @@ export default {
       dialogMes: {},
 
       api: {
-        getList: expendituretransaction
+        getList: salesmantransactionlog
       }
     }
   },

@@ -16,6 +16,14 @@ export function expendituretransaction(data) {
   })
 }
 
+export function salesmantransactionlog(data) {
+  return request({
+    url: `/admin/salesmantransactionlog?page=${data.page}&limit=${data.limit}`,
+    method: 'post',
+    data
+  })
+}
+
 
 export function networktj(data) {
   return request({
