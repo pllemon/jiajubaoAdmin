@@ -105,6 +105,23 @@ export const mainAdminRoutes = [
     ]
   },
 
+  
+  {
+    path: '/specialUser',
+    component: Layout,
+    redirect: '/specialUser/list',
+    name: 'SpecialUser',
+    meta: { title: '特殊用户管理', icon: 'namecard' },
+    children: [
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/specialUser/list'),
+        meta: { title: '全部特殊用户', menu: '2-9'}
+      }
+    ]
+  },
+
 
   {
     path: '/businessman',

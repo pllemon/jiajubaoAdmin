@@ -137,6 +137,11 @@ const menuData = [
         path: '/salesman/list'
       },
       {
+        id: '2-9',
+        title: '特殊用户列表',
+        path: '/specialUser/list'
+      },
+      {
         id: '2-5',
         title: '施工广场',
         path: '/show/list'
